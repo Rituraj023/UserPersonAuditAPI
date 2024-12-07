@@ -1,33 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserPersonAuditAPI.Data;
-using UserPersonAuditAPI.Models;
+using UserPersonAuditAPI.Models.Person;
 
 namespace UserPersonAuditAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class PersonsController(ApplicationDbContext context) : ControllerBase
     {
-        private readonly AppDbContext _context;
-
-        public PersonsController(AppDbContext context)
-        {
-            _context = context;
-        }
-
         [HttpGet]
         public IActionResult GetPersons()
         {
-            return Ok(_context.Persons.Include(p => p.CreatedBy).Include(p => p.UpdatedBy).ToList());
+            return Ok(context.Set<Person>().Include(p => p.CreatedBy).Include(p => p.UpdatedBy).ToList());
         }
 
         [HttpPost]
         public IActionResult CreatePerson(Person person)
         {
             person.CreatedOn = DateTime.UtcNow;
-            _context.Persons.Add(person);
-            _context.SaveChanges();
+            context.Set<Person>().Add(person);
+            context.SaveChanges();
             return Ok(person);
         }
     }

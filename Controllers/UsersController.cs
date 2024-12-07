@@ -1,31 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserPersonAuditAPI.Data;
-using UserPersonAuditAPI.Models;
+using UserPersonAuditAPI.Models.Identity;
 
 namespace UserPersonAuditAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController(ApplicationDbContext context) : ControllerBase
     {
-        private readonly AppDbContext _context;
-
-        public UsersController(AppDbContext context)
-        {
-            _context = context;
-        }
-
         [HttpGet]
         public IActionResult GetUsers()
         {
-            return Ok(_context.Users.ToList());
+            return Ok(context.Set<User>().ToList());
         }
 
         [HttpPost]
         public IActionResult CreateUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            context.Set<User>().Add(user);
+            context.SaveChanges();
             return Ok(user);
         }
     }
