@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserPersonAuditAPI.Data;
-using UserPersonAuditAPI.Models.Person;
+using UserPersonAuditAPI.Models.Identity;
 
 namespace UserPersonAuditAPI.Controllers
 {

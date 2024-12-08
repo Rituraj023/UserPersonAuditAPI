@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using UserPersonAuditAPI.Models.Base;
 
-namespace UserPersonAuditAPI.Models.Basic
+namespace UserPersonAuditAPI.Models.Identity
 {
     public class StakeHolderType : BaseEntity<short>
     {

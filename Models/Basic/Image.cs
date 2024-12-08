@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserPersonAuditAPI.Models.Basic
 {
@@ -6,6 +7,10 @@ namespace UserPersonAuditAPI.Models.Basic
     {
         [Key]
         public ulong Id { get; set; } // Primary key
+
+        [Required]
+        [Column(TypeName = "uniqueidentifier")]
+        public Guid RecordId { get; set; } = Guid.NewGuid(); // Unique Guid for display
 
         [Required]
         [MaxLength(500)] // Adjust the length based on your URL requirements

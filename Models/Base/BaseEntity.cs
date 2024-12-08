@@ -19,14 +19,14 @@ namespace UserPersonAuditAPI.Models.Base
 
         public DateTime UpdatedOn { get; set; } = DateTime.UtcNow;
 
-        public int CreatedById { get; set; }
-        public int UpdatedById { get; set; }
+        public ulong CreatedById { get; set; }
+        public ulong UpdatedById { get; set; }
 
         [ForeignKey(nameof(CreatedById))]
-        public User CreatedBy { get; set; }
+        public ApplicationUser CreatedBy { get; set; }
 
         [ForeignKey(nameof(UpdatedById))]
-        public User UpdatedBy { get; set; }
+        public ApplicationUser UpdatedBy { get; set; }
     }
 
 

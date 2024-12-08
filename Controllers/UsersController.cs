@@ -11,13 +11,13 @@ namespace UserPersonAuditAPI.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
-            return Ok(context.Set<User>().ToList());
+            return Ok(context.Set<ApplicationUser>().ToList());
         }
 
         [HttpPost]
-        public IActionResult CreateUser(User user)
+        public IActionResult CreateUser(ApplicationUser user)
         {
-            context.Set<User>().Add(user);
+            context.Set<ApplicationUser>().Add(user);
             context.SaveChanges();
             return Ok(user);
         }

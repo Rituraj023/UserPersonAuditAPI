@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UserPersonAuditAPI.Models.Base;
 using UserPersonAuditAPI.Models.Basic;
-using UserPersonAuditAPI.Models.Identity;
-using UserPersonAuditAPI.Models.Person;
 
 namespace UserPersonAuditAPI.Data
 {
@@ -18,11 +16,11 @@ namespace UserPersonAuditAPI.Data
             base.OnModelCreating(modelBuilder);
 
             // Register all entities manually
-            modelBuilder.Entity<User>();
+            //modelBuilder.Entity<ApplicationUser>();
             modelBuilder.Entity<Image>();
-            modelBuilder.Entity<Person>();
-            modelBuilder.Entity<StakeHolder>();
-            modelBuilder.Entity<StakeHolderType>();
+            //modelBuilder.Entity<Person>();
+            //modelBuilder.Entity<StakeHolder>();
+            //modelBuilder.Entity<StakeHolderType>();
 
             // Add your custom configurations (e.g., global settings)
             ApplyGlobalConfigurations(modelBuilder);
@@ -59,16 +57,7 @@ namespace UserPersonAuditAPI.Data
                 {
                     tableName = tableName.ToUpperInvariant();
                     entityType.SetTableName(tableName);
-                }
-
-                foreach (var property in entityType.GetProperties())
-                {
-                    var columnName = property.GetColumnName();
-                    if (!string.IsNullOrEmpty(columnName))
-                    {
-                        property.SetColumnName(columnName.ToLowerInvariant());
-                    }
-                }
+                }                
             }
         }
     }
